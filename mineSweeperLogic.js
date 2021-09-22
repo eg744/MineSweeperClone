@@ -45,11 +45,28 @@ export function createBoard(boardSize, numberOfMines){
 }
 
 export function checkLoss(board){
-    
+    //Check every tile 
+    return board.some(row => {
+        return row.some(tile => {
+            //True if any revealed tile is a mine
+            return tile.status === TILE_STATUS.MINE;
+        });
+    });
 }
 
 export function checkWin(board){
-    
+    //check every tile in board
+    return board.every(row => {
+        return row.every(tile => {
+            //True if all non mine tiles are numbered/revealed, 
+            //and all the mines are marked or hidden.
+            return (tile.status === TILE_STATUS.NUMBER || 
+                (tile.mine && 
+                    (tile.status === TILE_STATUS.HIDDEN || 
+                    tile.status === TILE_STATUS.MARKED))
+            )
+        })
+    })
 }
 
 function getMinePositions(boardSize, numberOfMines){

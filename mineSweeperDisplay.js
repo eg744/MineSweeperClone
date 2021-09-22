@@ -26,9 +26,9 @@ board.forEach(row => {
             checkGameConclusion();
         });
         //right click eventlistener
-        tile.element.addEventListener("contextmenu", e => {
+        tile.element.addEventListener("contextmenu", rclick => {
             //prevent contextmenu
-            e.preventDefault();
+            rclick.preventDefault();
             markTile(tile);
             updateMinesLeft();
         });
